@@ -5,15 +5,15 @@
 
 using namespace std;
 
-struct symptom{
+struct symptom{    // not using same as knowledge 
   int symptomNum;
   string name;
   int have; // -1 no info, 0 dont have 1 have
 };
 
-struct conclusion{
-  int ruleNUM;
-  string conclusion; // what conclusion is 
+struct knowledge{
+  int identifyNum;
+  string Name; // what conclusion is 
   int status; // -1 no info, 0 dont have, 1 false
 
 
@@ -22,15 +22,15 @@ struct conclusion{
 
 int main( ){
 // create var list 
- symptom varList[6] = { { 16, "trouble sleeping", -1 },   
-                        { 6, "poor concentration", -1 },
-                        { 12, "expereance sadness", -1 },
-                        { 14, "loss of pleasure", -1 },
-                        { 18, "weight loss", -1 },
-                        { 21, "hallucinations", -1 }
+ knowledge varList[6] = { { 16, "trouble sleeping", -1 },  //0 
+                        { 6, "poor concentration", -1 },  //1
+                        { 12, "expereance sadness", -1 }, //2
+                        { 14, "loss of pleasure", -1 },  //3
+                        { 18, "weight loss", -1 },      //4
+                        { 21, "hallucinations", -1 }   //5 
                       };
 // create conclusion list 
-conclusion conList[25] = { { 10, "A", -1 },   
+knowledge conList[25] = { { 10, "A", -1 },   
                            { 20, "B", -1 },
                            { 30, "C", -1 },
                            { 40, "G", -1 },
@@ -56,6 +56,18 @@ conclusion conList[25] = { { 10, "A", -1 },
                            { 240, "M", -1 },
                            { 250, "disease", -1 }
                       };
+// set clause var list
+knowledge *clauseVarList[100]; // 97 is last one used 
+
+clauseVarList[1] = &varList[0];
+clauseVarList[5] = &varList[0];
+clauseVarList[9] = &conList[0];
+clauseVarList[10] = &varList[1];
+clauseVarList[13] = &conList[2];
+//.........
+
+
+
 
 
 }
