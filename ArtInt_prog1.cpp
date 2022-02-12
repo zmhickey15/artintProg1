@@ -59,12 +59,49 @@ knowledge conList[25] = { { 10, "A", -1 },
 // set clause var list
 knowledge *clauseVarList[100]; // 97 is last one used 
 
-clauseVarList[1] = &varList[0];
-clauseVarList[5] = &varList[0];
-clauseVarList[9] = &conList[0];
-clauseVarList[10] = &varList[1];
-clauseVarList[13] = &conList[2];
-//.........
+    clauseVarList[1] = &varList[0];
+    clauseVarList[5] = &varList[0];
+    clauseVarList[9] = &conList[0];
+    clauseVarList[10] = &varList[1];
+    clauseVarList[13] = &conList[1];
+    clauseVarList[14] = &varList[2];
+    clauseVarList[15] = &varList[3];
+    clauseVarList[17] = &conList[3];
+    clauseVarList[18] = &varList[4];
+    clauseVarList[21] = &conList[4];
+    clauseVarList[25] = &conList[3];
+    clauseVarList[26] = &varList[2];
+    clauseVarList[29] = &conList[6];
+    clauseVarList[33] = &conList[3];
+    clauseVarList[34] = &varList[4];
+    clauseVarList[37] = &conList[8];
+    clauseVarList[41] = &conList[0];
+    clauseVarList[42] = &varList[1];
+    clauseVarList[45] = &conList[10];
+    clauseVarList[46] = &varList[2];
+    clauseVarList[47] = &varList[3];
+    clauseVarList[49] = &conList[11];
+    clauseVarList[50] = &varList[4];
+    clauseVarList[53] = &conList[12];
+    clauseVarList[57] = &conList[10];
+    clauseVarList[58] = &varList[2];
+    clauseVarList[61] = &conList[14];
+    clauseVarList[62] = &varList[4];
+    clauseVarList[65] = &conList[15];
+    clauseVarList[69] = &conList[1];
+    clauseVarList[70] = &varList[6];
+    clauseVarList[73] = &conList[17];
+    clauseVarList[74] = &varList[5];
+    clauseVarList[77] = &conList[18];
+    clauseVarList[81] = &conList[1];
+    clauseVarList[82] = &varList[1];
+    clauseVarList[85] = &conList[20];
+    clauseVarList[86] = &varList[5];
+    clauseVarList[89] = &conList[22];
+    clauseVarList[93] = &conList[21];
+    clauseVarList[94] = &varList[5];
+    clauseVarList[97] = &conList[24];
+        
 
 
 
