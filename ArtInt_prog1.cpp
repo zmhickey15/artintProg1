@@ -18,7 +18,7 @@ struct knowledge{
 
 
 };
-
+void getVar( knowledge &var );
 
 int main( ){
 // create var list 
@@ -101,11 +101,35 @@ knowledge *clauseVarList[100]; // 97 is last one used
     clauseVarList[93] = &conList[21];
     clauseVarList[94] = &varList[5];
     clauseVarList[97] = &conList[24];
-        
+  
 
 
 
 
 
+
+}
+
+void getVar( knowledge &var ){
+  cout<<" Do you expereance the following symptom:"<<endl;
+  cout<<var.Name<<endl;
+  cout<< "enter 1 if you experance the symptom" << endl
+      << "enter 0 if you do not" << endl;
+      int value;
+      cin >> value;
+      do
+      {
+        if (value == 1 || value == 0){
+          var.status=value;
+          return;
+        }   
+        else {
+          cout<< "incorect imput: please enter 1 if you have symptom or 0 if you dont" 
+              << endl;
+            cin >>value;
+
+        }
+      } while (1==1);
+      
 }
 
