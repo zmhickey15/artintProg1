@@ -178,21 +178,21 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
         conclusions[a].status = 1;
       else
         conclusions[a].status = 0;
-      break;
+    break;
     
     case 20:
       if ( symptoms[0].status == 0 )
         conclusions[b].status = 1;
       else
         conclusions[b].status = 0;
-      break;
+    break;
     
     case 30:
       if ( conclusions[a].status == 1 && symptoms[1].status == 1 )
         conclusions[c].status = 1;
       else 
         conclusions[c].status = 0;
-      break;
+    break;
     
     case 40:
       if ( conclusions[c].status == 1 && symptoms[2].status == 1 
@@ -200,14 +200,14 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
           conclusions[g].status = 1;
       else 
         conclusions[g].status = 0;
-      break;
+    break;
     
     case 50:
       if ( conclusions[g].status == 1 && symptoms[4].status == 1 )
         conclusions[n].status = 1;
       else 
         conclusions[n].status = 0;
-      break;
+     break;
     
     case 60:
       if ( conclusions[n].status == 1 ){
@@ -216,14 +216,14 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
       }
       else  
         conclusions[5].status = 0;
-      break;
+    break;
     
     case 70:
       if ( conclusions[c].status == 1 && symptoms[2].status == 0)
         conclusions[h].status = 1;
       else
         conclusions[h].status = 0;
-      break;
+    break;
     
     case 80:
       if ( conclusions[h].status == 1 ){
@@ -232,14 +232,14 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
       }
       else
         conclusions[7].status = 0;
-      break;
+    break;
     
     case 90:
       if ( conclusions[g].status == 1 && symptoms[4].status == 0 )
         conclusions[o].status = 1;
       else
         conclusions[0].status = 0;
-      break;
+    break;
     
     case 100:
       if ( conclusions[o].status == 1 ){
@@ -248,14 +248,14 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
       }
       else 
         conclusions[9].status = 0;
-      break;
+    break;
     
     case 110:
       if( conclusions[a].status == 1 && symptoms[1].status == 0 )
         conclusions[d].status = 1;
       else 
         conclusions[d].status = 0;
-      break;
+    break;
     
     case 120:
       if ( conclusions[d].status == 1 && symptoms[2].status == 1 &&
@@ -264,14 +264,106 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
       else
         conclusions[i].status = 0;
     break;
-
-    ///......
-
-
+  
+    case 130:
+      if ( conclusions[i].status == 1 && symptoms[4].status == 1)
+        conclusions[p].status = 1;
+      else 
+        conclusions[p].status = 0;
+    break;
     
+    case 140:
+      if ( conclusions[p].status == 1 ){
+        conclusions[13].status = 1;
+        conclusions[13].diseaseName = "Major Depressive Disorder";
+      }
+      else 
+        conclusions[13].status = 0;
+    break;
     
+    case 150:
+      if ( conclusions[d].status == 1 && symptoms[2].status == 0 )
+        conclusions[j].status = 1;
+      else 
+        conclusions[j].status = 0;
+    break;
 
+    case 160:
+      if(conclusions[j].status == 1 && symptoms[4].status == 1)
+        conclusions[q].status = 1;
+      else 
+        conclusions[q].status = 0;
+    break;
+    
+    case 170:
+      if ( conclusions[q].status == 1 ){
+        conclusions[16].status = 1;
+        conclusions[16].diseaseName = "Disocitve Identity Disorder";
+      }
+      else 
+        conclusions[16].status = 0;
+    break;
 
+    case 180: 
+      if ( conclusions[b].status == 1 && symptoms[1].status == 1 )
+        conclusions[e].status =1;
+      else
+        conclusions[e].status = 0;
+    break;
+
+    case 190:
+      if ( conclusions[e].status == 1 && symptoms[5].status == 1)
+        conclusions[s].status = 1;
+      else 
+        conclusions[s].status = 0;
+    break;
+    
+    case 200:
+      if ( conclusions[s].status == 1 ){
+        conclusions[19].status = 1;
+        conclusions[19].diseaseName = "Schizophrenia";
+      }
+      else
+        conclusions[19].status = 0;
+    break;
+    
+    case 210:
+      if ( conclusions[b].status == 1 && symptoms[1].status == 0 )
+        conclusions[f].status = 1;
+      else  
+        conclusions[f].status = 0;
+    break;
+
+    case 220:
+      if ( conclusions[f].status == 1 && symptoms[5].status == 1 )
+        conclusions[l].status = 1;
+      else conclusions[l].status = 0;
+    break;
+
+    case 230:
+      if ( conclusions[l].status == 1 ){
+          conclusions[22].status = 1;
+          conclusions[22].diseaseName = "Achizo-Affective Disorder";
+      }   
+      else  
+        conclusions[22].status = 0;
+    break;
+
+    case 240:
+      if ( conclusions[f].status == 1 && symptoms[5].status == 0 )
+        conclusions[m].status = 1;
+      else
+        conclusions[m].status = 0;
+    break;
+
+    case 250:
+      if ( conclusions[m].status == 1 ){
+          conclusions[24].status = 1;
+          conclusions[24].diseaseName = " Panic Disorder";
+      }
+      else 
+        conclusions[24].status = 0;
+    break;
     default:
       break;
 }
