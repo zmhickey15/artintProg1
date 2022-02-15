@@ -15,10 +15,12 @@ struct knowledge{
   int identifyNum;
   string Name; // what conclusion is 
   int status; // -1 no info, 0 dont have, 1 false
+  string diseaseName;
 
 
 };
 void getVar( knowledge &var );
+void checkRule( int ruleNUM, knowledge *conclusions, knowledge *vars);
 
 int main( ){
 // create var list 
@@ -104,14 +106,28 @@ knowledge *clauseVarList[100]; // 97 is last one used
   
 
 
+/// testing 
 
 
+getVar(*clauseVarList[1]);
+getVar(*clauseVarList[10]);
+getVar(*clauseVarList[14]);
+
+checkRule(10, conList, varList);
+checkRule(30, conList, varList);
+checkRule(70, conList, varList);
+checkRule(80, conList, varList);
+
+if(conList[7].status == 1)
+  cout<< endl << "you have " <<conList[7].diseaseName;
+else 
+  cout <<endl << "no disease yet";
 
 
 }
 
 void getVar( knowledge &var ){
-  cout<<" Do you expereance the following symptom:"<<endl;
+  cout<< endl << "Do you expereance the following symptom:"<<endl;
   cout<<var.Name<<endl;
   cout<< "enter 1 if you experance the symptom" << endl
       << "enter 0 if you do not" << endl;
@@ -133,3 +149,133 @@ void getVar( knowledge &var ){
       
 }
 
+void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
+  // conclusions ints 
+  int a = 0;
+  int b = 1;
+  int c = 2;
+  int d = 10;
+  int e = 17;
+  int f = 20;
+  int g = 3;
+  int h = 6;
+  int i = 11;
+  int j = 14;
+  int k = 1;
+  int l = 21;
+  int m = 23;
+  int n = 4;
+  int o = 8;
+  int p = 12;
+  int q = 15;
+  int s = 18;
+  int ruleNum = ruleNUM;
+
+  switch (ruleNum){
+
+    case 10:
+      if( symptoms[0].status == 1 )
+        conclusions[a].status = 1;
+      else
+        conclusions[a].status = 0;
+      break;
+    
+    case 20:
+      if ( symptoms[0].status == 0 )
+        conclusions[b].status = 1;
+      else
+        conclusions[b].status = 0;
+      break;
+    
+    case 30:
+      if ( conclusions[a].status == 1 && symptoms[1].status == 1 )
+        conclusions[c].status = 1;
+      else 
+        conclusions[c].status = 0;
+      break;
+    
+    case 40:
+      if ( conclusions[c].status == 1 && symptoms[2].status == 1 
+            && symptoms[3].status ==1 )
+          conclusions[g].status = 1;
+      else 
+        conclusions[g].status = 0;
+      break;
+    
+    case 50:
+      if ( conclusions[g].status == 1 && symptoms[4].status == 1 )
+        conclusions[n].status = 1;
+      else 
+        conclusions[n].status = 0;
+      break;
+    
+    case 60:
+      if ( conclusions[n].status == 1 ){
+        conclusions[5].status = 1;
+        conclusions[5].diseaseName = "Dyshymia";
+      }
+      else  
+        conclusions[5].status = 0;
+      break;
+    
+    case 70:
+      if ( conclusions[c].status == 1 && symptoms[2].status == 0)
+        conclusions[h].status = 1;
+      else
+        conclusions[h].status = 0;
+      break;
+    
+    case 80:
+      if ( conclusions[h].status == 1 ){
+        conclusions[7].status = 1;
+        conclusions[7].diseaseName = "Generalized Anxiety";
+      }
+      else
+        conclusions[7].status = 0;
+      break;
+    
+    case 90:
+      if ( conclusions[g].status == 1 && symptoms[4].status == 0 )
+        conclusions[o].status = 1;
+      else
+        conclusions[0].status = 0;
+      break;
+    
+    case 100:
+      if ( conclusions[o].status == 1 ){
+        conclusions[9].status = 1;
+        conclusions[9].diseaseName = "Bipolar";
+      }
+      else 
+        conclusions[9].status = 0;
+      break;
+    
+    case 110:
+      if( conclusions[a].status == 1 && symptoms[1].status == 0 )
+        conclusions[d].status = 1;
+      else 
+        conclusions[d].status = 0;
+      break;
+    
+    case 120:
+      if ( conclusions[d].status == 1 && symptoms[2].status == 1 &&
+          symptoms[3].status == 1 )
+        conclusions[i].status = 1;
+      else
+        conclusions[i].status = 0;
+    break;
+
+    ///......
+
+
+    
+    
+
+
+    default:
+      break;
+}
+
+
+
+}
