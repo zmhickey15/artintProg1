@@ -108,21 +108,149 @@ knowledge *clauseVarList[100]; // 97 is last one used
 
 /// testing 
 
+        getVar(*clauseVarList[1]);
+        checkRule(10, conList, varList);
+        
+        if (conList[0].status == 1){
+            
+            getVar(*clauseVarList[10]);
+            checkRule(30, conList, varList);
+            
+            if (conList[2].status == 1){
+                
+                getVar(*clauseVarList[14]);
+                checkRule(70, conList, varList);
+                       
+                if (conList[6].status == 1){
+                    
+                    checkRule(80, conList, varList);
+                    
+                    if (conList[7].status == 1){
+                        
+                        cout<< endl << "you have " <<conList[7].diseaseName << endl;;
+                      
+                    }
+                    else
+                    {
+                      cout <<endl << "no disease yet";
+                        
+                    }
+                    
+                }
+                else if (conList[6].status == 0){
+                    
+                    getVar(*clauseVarList[15]);
+                    checkRule(40, conList, varList);
+                    
+                    if (conList[3].status == 1){
+                        
+                        getVar(*clauseVarList[18]);
+                        checkRule(50, conList, varList);
+                        
+                        if (conList[4].status == 1){
+                            
+                            checkRule(60, conList, varList);
+                            
+                            if (conList[5].status == 1){
+                                
+                                cout << "you have " << conList[5].diseaseName << endl;
+                            }
+                            else {
+                                cout << "disease not found " << endl;
+                            }
+                            
+                        }
+                        else {
+                            
+                            checkRule(90, conList, varList);
+                            
+                            if (conList[8].status == 1){
+                                
+                                checkRule(100, conList, varList);
+                                
+                                if (conList[9].status == 1){
+                                    cout << "You have " << conList[9].diseaseName << endl;
+                                }
+                                else {
+                                    cout << "disease not found " << endl;
+                                }
+                            }
 
-getVar(*clauseVarList[1]);
-getVar(*clauseVarList[10]);
-getVar(*clauseVarList[14]);
+                        }
 
-checkRule(10, conList, varList);
-checkRule(30, conList, varList);
-checkRule(70, conList, varList);
-checkRule(80, conList, varList);
+                        
+                    }
+                    
+                }
+                
+            }
+            else if (conList[2].status == 0){
+                
+                getVar(*clauseVarList[58]); //experience sadness
+                checkRule(110, conList, varList); //if a = 1 and
+                
+                if (conList[10].status == 1){
+                    
+                    getVar(*clauseVarList[47]);
+                    checkRule(120, conList, varList);
+                    
+                    if (conList[11].status == 1){
+                        
+                        getVar(*clauseVarList[50]);
+                        checkRule(130, conList, varList);
+                        
+                        if (conList[12].status == 1){
+                            
+                            checkRule(140, conList, varList);
+                            
+                            if (conList[13].status == 1){
+                                
+                                cout << " You have " << conList[13].diseaseName << endl;
+                            }
+                            else {
+                                cout << "no disease found " << endl;
+                            }
 
-if(conList[7].status == 1)
-  cout<< endl << "you have " <<conList[7].diseaseName;
-else 
-  cout <<endl << "no disease yet";
+                        }
 
+                    }
+                    
+                }
+                else {  //trouble finding disociative identity disorder
+                    getVar(*clauseVarList[62]);
+                    checkRule(150, conList, varList);
+                    if (conList[14].status == 1){
+                        checkRule(160, conList, varList);
+                        checkRule(170, conList, varList);
+                        if (conList[15].status == 1){
+                            cout << "You have " << conList[15].diseaseName << endl;
+                        }
+                        else {
+                            cout << "diseease not found " << endl;
+                        }
+                        
+                    }
+                    
+                    
+                }
+            }
+    }
+        else if (conList[0].status == 0){
+            cout << "test" << endl;
+        }
+      
+
+
+    //checkRule(30, conList, varList);
+    //checkRule(70, conList, varList);
+    //checkRule(80, conList, varList);
+
+        //if(conList[7].status == 1)
+          //cout<< endl << "you have " <<conList[7].diseaseName;
+       //else
+          //cout <<endl << "no disease yet";
+
+    return 0;
 
 }
 
