@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <stack>
 #include <vector>
 #include<string>
 
@@ -24,12 +25,12 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *vars);
 
 int main( ){
 // create var list 
- knowledge varList[6] = { { 16, "trouble sleeping", -1 },  //0 
-                        { 6, "poor concentration", -1 },  //1
-                        { 12, "expereance sadness", -1 }, //2
-                        { 14, "loss of pleasure", -1 },  //3
-                        { 18, "weight loss", -1 },      //4
-                        { 21, "hallucinations", -1 }   //5 
+ knowledge varList[6] = { { 0, "trouble sleeping", -1 },  //0  16
+                        { 1, "poor concentration", -1 },  //1   6
+                        { 2, "expereance sadness", -1 }, //2   12
+                        { 3, "loss of pleasure", -1 },  //3  14
+                        { 4, "weight loss", -1 },      //4  18
+                        { 5, "hallucinations", -1 }   //5   21
                       };
 // create conclusion list 
 knowledge conList[25] = { { 10, "A", -1 },   
@@ -62,51 +63,100 @@ knowledge conList[25] = { { 10, "A", -1 },
 knowledge *clauseVarList[100]; // 97 is last one used 
 
     clauseVarList[1] = &varList[0];
+    clauseVarList[2] = nullptr;
+
     clauseVarList[5] = &varList[0];
+    clauseVarList[6] = nullptr;
     clauseVarList[9] = &conList[0];
     clauseVarList[10] = &varList[1];
-    clauseVarList[13] = &conList[1];
+    clauseVarList[11] = nullptr;
+
+    clauseVarList[13] = &conList[2];
     clauseVarList[14] = &varList[2];
     clauseVarList[15] = &varList[3];
+  clauseVarList[16] = nullptr;
+
     clauseVarList[17] = &conList[3];
     clauseVarList[18] = &varList[4];
+clauseVarList[19] = nullptr;
+
     clauseVarList[21] = &conList[4];
+    clauseVarList[22] = nullptr;
+
     clauseVarList[25] = &conList[3];
     clauseVarList[26] = &varList[2];
+    clauseVarList[27] = nullptr;
+
     clauseVarList[29] = &conList[6];
+    clauseVarList[30] = nullptr;
+
     clauseVarList[33] = &conList[3];
     clauseVarList[34] = &varList[4];
+clauseVarList[35] = nullptr;
+
     clauseVarList[37] = &conList[8];
+  clauseVarList[38] = nullptr;
+
     clauseVarList[41] = &conList[0];
     clauseVarList[42] = &varList[1];
+clauseVarList[43] = nullptr;
+
     clauseVarList[45] = &conList[10];
     clauseVarList[46] = &varList[2];
     clauseVarList[47] = &varList[3];
+clauseVarList[48] = nullptr;
+
     clauseVarList[49] = &conList[11];
     clauseVarList[50] = &varList[4];
+  clauseVarList[51] = nullptr;
+
     clauseVarList[53] = &conList[12];
+    clauseVarList[54] = nullptr;
+
     clauseVarList[57] = &conList[10];
     clauseVarList[58] = &varList[2];
+clauseVarList[59] = nullptr;
+
     clauseVarList[61] = &conList[14];
     clauseVarList[62] = &varList[4];
+      clauseVarList[63] = nullptr;
+    
     clauseVarList[65] = &conList[15];
+    clauseVarList[66] = nullptr;
+
     clauseVarList[69] = &conList[1];
     clauseVarList[70] = &varList[6];
+clauseVarList[71] = nullptr;
+
     clauseVarList[73] = &conList[17];
     clauseVarList[74] = &varList[5];
+clauseVarList[75] = nullptr;
+
     clauseVarList[77] = &conList[18];
+    clauseVarList[78] = nullptr;
+
     clauseVarList[81] = &conList[1];
     clauseVarList[82] = &varList[1];
+
+    clauseVarList[83] = nullptr;
+
     clauseVarList[85] = &conList[20];
     clauseVarList[86] = &varList[5];
+clauseVarList[87] = nullptr;
+
     clauseVarList[89] = &conList[22];
+    clauseVarList[90] = nullptr;
+
     clauseVarList[93] = &conList[21];
     clauseVarList[94] = &varList[5];
+clauseVarList[95] = nullptr;
+
     clauseVarList[97] = &conList[24];
-  
+  clauseVarList[98] = nullptr;
 
 
-/// testing 
+/// testing
+ /*
 
         getVar(*clauseVarList[1]);
         checkRule(10, conList, varList);
@@ -239,7 +289,7 @@ knowledge *clauseVarList[100]; // 97 is last one used
             cout << "test" << endl;
         }
       
-
+*/
 
     //checkRule(30, conList, varList);
     //checkRule(70, conList, varList);
@@ -250,7 +300,73 @@ knowledge *clauseVarList[100]; // 97 is last one used
        //else
           //cout <<endl << "no disease yet";
 
-    return 0;
+
+
+
+    bool done = false;
+    knowledge* disease;
+    stack<knowledge> conStack; 
+    while ( done == false ){  
+
+      for ( knowledge con : conList){
+        //cout << con.Name << endl;
+        if ( con.Name.compare("disease")==0 && con.status == -1 ){
+          conStack.push(con);
+          break;
+        }
+        if ( con.Name.compare("disease")==0 && con.status == 1 )
+        {
+        done = true;
+        cout<<con.diseaseName;
+        return 0;
+        }
+       
+      } 
+        while( !conStack.empty() ){ // loop to check if disease is good or not 
+          disease = &conStack.top();
+          int clauseNum = (4 * ( (*disease).identifyNum / 10 - 1 ) + 1 );
+
+      // checs diseases stuff in clause var list 
+          while (clauseVarList[clauseNum] != nullptr){
+            if( clauseVarList[clauseNum]->status == -1){
+              if( clauseVarList[clauseNum]->identifyNum < 10 )// its a var 
+                getVar(*clauseVarList[clauseNum]);
+              else{ 
+                conStack.push( *clauseVarList[clauseNum] );
+                //cout<<clauseVarList[clauseNum]->Name << endl; // for testing  // endliss loop is heer
+              }
+          }
+            clauseNum ++;
+          }
+          // check rule 
+        disease = &conStack.top();
+        clauseNum = (4 * ( (*disease).identifyNum / 10 - 1 ) + 1 ); 
+        bool rule = true;
+
+        while (clauseVarList[clauseNum] != nullptr){
+            if(clauseVarList[clauseNum]->status == -1){
+              rule = false;
+            }
+            clauseNum++;
+        }
+        if( rule == true ){
+              checkRule((*disease).identifyNum, conList, varList);
+              
+              clauseNum = (4 * ( (*disease).identifyNum / 10 - 1 ) + 1 ); 
+              disease = clauseVarList[clauseNum];
+             //  cout << "rule tested" << (*disease).Name << (*disease).status << endl;
+               conStack.pop();
+        }
+
+     if ( (*disease).Name.compare("disease")== 0 && (*disease).status == 1 )
+        done = true;
+
+    }
+    cout << endl << (*disease).diseaseName;
+
+  }
+
+  
 
 }
 
@@ -366,7 +482,7 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
       if ( conclusions[g].status == 1 && symptoms[4].status == 0 )
         conclusions[o].status = 1;
       else
-        conclusions[0].status = 0;
+        conclusions[o].status = 0;
     break;
     
     case 100:
