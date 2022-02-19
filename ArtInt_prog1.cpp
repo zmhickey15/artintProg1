@@ -144,14 +144,14 @@ clauseVarList[75] = nullptr;
     clauseVarList[86] = &varList[5];
 clauseVarList[87] = nullptr;
 
-    clauseVarList[89] = &conList[22];
+    clauseVarList[89] = &conList[21]; // was 22
     clauseVarList[90] = nullptr;
 
-    clauseVarList[93] = &conList[21];
+    clauseVarList[93] = &conList[20]; // was 21
     clauseVarList[94] = &varList[5];
-clauseVarList[95] = nullptr;
+  clauseVarList[95] = nullptr;
 
-    clauseVarList[97] = &conList[24];
+    clauseVarList[97] = &conList[23]; // was 24
   clauseVarList[98] = nullptr;
 
 
@@ -362,7 +362,7 @@ clauseVarList[95] = nullptr;
         done = true;
 
     }
-    cout << endl << (*disease).diseaseName;
+   // cout << endl << (*disease).diseaseName;
 
   }
 
@@ -587,7 +587,7 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
     case 230:
       if ( conclusions[l].status == 1 ){
           conclusions[22].status = 1;
-          conclusions[22].diseaseName = "Achizo-Affective Disorder";
+          conclusions[22].diseaseName = "Schizo-Affective Disorder";
       }   
       else  
         conclusions[22].status = 0;
