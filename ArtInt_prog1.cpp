@@ -22,15 +22,28 @@ struct knowledge{
 };
 void getVar( knowledge &var );
 void checkRule( int ruleNUM, knowledge *conclusions, knowledge *vars);
+string forwardChain( knowledge *vars, knowledge disease);
 
 int main( ){
 // create var list 
- knowledge varList[6] = { { 0, "trouble sleeping", -1 },  //0  16
+ knowledge varList[16] = { { 0, "trouble sleeping", -1 },  //0  16
                         { 1, "poor concentration", -1 },  //1   6
                         { 2, "expereance sadness", -1 }, //2   12
                         { 3, "loss of pleasure", -1 },  //3  14
                         { 4, "weight loss", -1 },      //4  18
-                        { 5, "hallucinations", -1 }   //5   21
+                        { 5, "hallucinations", -1 },   //5   21
+
+                                                        // for forward chain                                                      
+                        { 6, "strugle to controle emotions", -1 }, //6
+                        { 7, "migranes", -1 }, //7
+                        { 8, "anxiety", -1 },  //8
+                        { 9, "stress", -1 },  //9
+                        { 10, "inappropriate emotions", -1 }, //10
+                        { 11, "depression", -1 }, //11 
+                        { 12, "maina", -1 }, //12
+                        { 13, "OCD", -1 }, //13
+                        { 14, "irriability", -1 }, //14
+                        { 15, "PTSD", -1 }, //15
                       };
 // create conclusion list 
 knowledge conList[25] = { { 10, "A", -1 },   
@@ -125,7 +138,7 @@ clauseVarList[59] = nullptr;
     clauseVarList[66] = nullptr;
 
     clauseVarList[69] = &conList[1];
-    clauseVarList[70] = &varList[6];
+    clauseVarList[70] = &varList[1]; // was 6
 clauseVarList[71] = nullptr;
 
     clauseVarList[73] = &conList[17];
@@ -155,150 +168,7 @@ clauseVarList[87] = nullptr;
   clauseVarList[98] = nullptr;
 
 
-/// testing
- /*
 
-        getVar(*clauseVarList[1]);
-        checkRule(10, conList, varList);
-        
-        if (conList[0].status == 1){
-            
-            getVar(*clauseVarList[10]);
-            checkRule(30, conList, varList);
-            
-            if (conList[2].status == 1){
-                
-                getVar(*clauseVarList[14]);
-                checkRule(70, conList, varList);
-                       
-                if (conList[6].status == 1){
-                    
-                    checkRule(80, conList, varList);
-                    
-                    if (conList[7].status == 1){
-                        
-                        cout<< endl << "you have " <<conList[7].diseaseName << endl;;
-                      
-                    }
-                    else
-                    {
-                      cout <<endl << "no disease yet";
-                        
-                    }
-                    
-                }
-                else if (conList[6].status == 0){
-                    
-                    getVar(*clauseVarList[15]);
-                    checkRule(40, conList, varList);
-                    
-                    if (conList[3].status == 1){
-                        
-                        getVar(*clauseVarList[18]);
-                        checkRule(50, conList, varList);
-                        
-                        if (conList[4].status == 1){
-                            
-                            checkRule(60, conList, varList);
-                            
-                            if (conList[5].status == 1){
-                                
-                                cout << "you have " << conList[5].diseaseName << endl;
-                            }
-                            else {
-                                cout << "disease not found " << endl;
-                            }
-                            
-                        }
-                        else {
-                            
-                            checkRule(90, conList, varList);
-                            
-                            if (conList[8].status == 1){
-                                
-                                checkRule(100, conList, varList);
-                                
-                                if (conList[9].status == 1){
-                                    cout << "You have " << conList[9].diseaseName << endl;
-                                }
-                                else {
-                                    cout << "disease not found " << endl;
-                                }
-                            }
-
-                        }
-
-                        
-                    }
-                    
-                }
-                
-            }
-            else if (conList[2].status == 0){
-                
-                getVar(*clauseVarList[58]); //experience sadness
-                checkRule(110, conList, varList); //if a = 1 and
-                
-                if (conList[10].status == 1){
-                    
-                    getVar(*clauseVarList[47]);
-                    checkRule(120, conList, varList);
-                    
-                    if (conList[11].status == 1){
-                        
-                        getVar(*clauseVarList[50]);
-                        checkRule(130, conList, varList);
-                        
-                        if (conList[12].status == 1){
-                            
-                            checkRule(140, conList, varList);
-                            
-                            if (conList[13].status == 1){
-                                
-                                cout << " You have " << conList[13].diseaseName << endl;
-                            }
-                            else {
-                                cout << "no disease found " << endl;
-                            }
-
-                        }
-
-                    }
-                    
-                }
-                else {  //trouble finding disociative identity disorder
-                    getVar(*clauseVarList[62]);
-                    checkRule(150, conList, varList);
-                    if (conList[14].status == 1){
-                        checkRule(160, conList, varList);
-                        checkRule(170, conList, varList);
-                        if (conList[15].status == 1){
-                            cout << "You have " << conList[15].diseaseName << endl;
-                        }
-                        else {
-                            cout << "diseease not found " << endl;
-                        }
-                        
-                    }
-                    
-                    
-                }
-            }
-    }
-        else if (conList[0].status == 0){
-            cout << "test" << endl;
-        }
-      
-*/
-
-    //checkRule(30, conList, varList);
-    //checkRule(70, conList, varList);
-    //checkRule(80, conList, varList);
-
-        //if(conList[7].status == 1)
-          //cout<< endl << "you have " <<conList[7].diseaseName;
-       //else
-          //cout <<endl << "no disease yet";
 
 
 
@@ -317,11 +187,15 @@ clauseVarList[87] = nullptr;
         if ( con.Name.compare("disease")==0 && con.status == 1 )
         {
         done = true;
-        cout<<con.diseaseName;
-        return 0;
+        *disease = con;   
         }
-       
+        //end while loop
+        if (done == true){
+          break;
+        }
       } 
+
+
         while( !conStack.empty() ){ // loop to check if disease is good or not 
           disease = &conStack.top();
           int clauseNum = (4 * ( (*disease).identifyNum / 10 - 1 ) + 1 );
@@ -360,13 +234,26 @@ clauseVarList[87] = nullptr;
 
      if ( (*disease).Name.compare("disease")== 0 && (*disease).status == 1 )
         done = true;
-
     }
-   // cout << endl << (*disease).diseaseName;
-
+    // edge case
+    int k = 0;
+    for ( knowledge con : conList){
+      if( con.Name.compare("disease")== 0 && con.status == 0){
+        k++;
+      }
+    }
+    if( k == 8){
+      done =true;
+      disease->diseaseName="no disease found";
+    }
   }
 
+  string treatment = forwardChain( varList, *disease );
+  cout << endl << endl << "you have been diagnosed with: " << (*disease).diseaseName << endl
+      << "the recomended treatment is: " << treatment << endl;
   
+  
+
 
 }
 
@@ -603,7 +490,7 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
     case 250:
       if ( conclusions[m].status == 1 ){
           conclusions[24].status = 1;
-          conclusions[24].diseaseName = " Panic Disorder";
+          conclusions[24].diseaseName = "Panic Disorder with Agoraphobia";
       }
       else 
         conclusions[24].status = 0;
@@ -613,5 +500,104 @@ void checkRule( int ruleNUM, knowledge *conclusions, knowledge *symptoms){
 }
 
 
+
+}
+
+
+string forwardChain( knowledge *vars, knowledge disease){
+ 
+  if(disease.diseaseName.compare("Bipolar") == 0){
+    if( vars[6].status == -1)
+      getVar( vars[6] );
+    if ( vars[6].status == 1)
+      return "psychotherapy";
+    if ( vars[7].status == -1 )
+      getVar( vars[7] );
+    if ( vars[6].status == 0 && vars[7].status == 1)
+      return "Divalproate";
+    else 
+      return "Paliperidone";
+  }
+  if ( disease.diseaseName.compare("Dyshymia") == 0 ){
+    if( vars[8].status == -1 )
+      getVar( vars[8] );
+    if( vars[2].status == 1 && vars[8].status ==1 )
+      return "Duloxetine";
+    if ( vars[2].status == 1 && vars[8].status ==0 )
+      return "Desvenlafaxine";
+  }
+  if( disease.diseaseName.compare ("Major Depressive Disorder") == 0){
+    if( vars[9].status == -1)
+      getVar( vars[9] );
+    if( vars[9].status ==1 )
+      return "Buspirone";
+    if( vars[8].status == -1 )
+      getVar( vars[8] );
+    if ( vars[9].status == 0 && vars[8].status == 1 )
+      return "Imipramine";
+    else 
+      return "Mirtazapine";
+  }
+  if (disease.diseaseName.compare("Disocitve Identity Disorder") == 0){
+    if( vars[8].status == -1 )
+      getVar( vars[8] );
+    if( vars[0].status == 1 && vars[8].status == 1)
+      return "Clonazepam";
+    else  
+      return "melatonin";
+
+  }
+  if( disease.diseaseName.compare("Generalized Anxiety") == 0){
+    if( vars[10].status == -1 )
+      getVar( vars[10] );
+    if( vars[10].status == 1)
+        return "Paliperidone";
+    if( vars[11].status == -1 )
+      getVar( vars[11] );
+    if( vars[11].status == 1 && vars[10].status == 0)
+        return "Citalopram";
+    else
+      return "Duloxetine";
+  }
+
+  if ( disease.diseaseName.compare("Schizophrenia") == 0 ){
+    if( vars[12].status == -1 )
+      getVar( vars[12] );
+    if( vars[12].status == 1)
+        return "Olanzapine";
+    else 
+      return "Quetiapine";
+  }
+
+  if( disease.diseaseName.compare ("Schizo-Affective Disorder") == 0 ){
+    if( vars[13].status == -1 )
+      getVar( vars[13] );
+    if( vars[13].status == 1 )
+      return "Sertraline";
+    if( vars[14].status == -1 )
+      getVar( vars[14] );
+    if( vars[13].status == 0 && vars[14].status == 1 )
+      return "Risperidone";   
+    else  
+      return "Fluoxetine";
+  }
+
+  if( disease.diseaseName.compare ("Panic Disorder with Agoraphobia") == 0 ){
+    if( vars[13].status == -1 )
+      getVar( vars[13] );
+    if( vars[13].status == 1 )
+      return "Sertraline";
+    if( vars[15].status == -1 )
+      getVar( vars[15] );
+    if( vars[13].status == 0 && vars[15].status == 1)
+      return "Paroxetine";
+    if( vars[11].status == -1 )
+      getVar( vars[11] );
+    if( vars[13].status == 0 && vars[15].status ==0 && vars[11].status ==1 )
+      return "Tricyclic Antidepressants";
+    else 
+      return "Fluoxetine";
+  }
+  return "no treatment recomended";
 
 }
